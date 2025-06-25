@@ -8,116 +8,23 @@ import Hero from "./components/section/hero";
 import Works from "./components/section/works";
 import BlurText from "./components/base/blurred-text";
 import Particles from "./components/base/particles";
+import { worksItem, specialist } from "./data/data";
+import ScrollFloat from "./components/base/scroll-text";
+import { useRef } from "react";
+import Card from "./components/section/card";
 
 const App = () => {
-  const specialist = [
-    {
-      text: "Mobile Development",
-      image: "/mobile_development.jpg",
-    },
-    {
-      text: "Website Development",
-      image: "/web_development.jpg",
-    },
-    {
-      text: "UI/UX Design",
-      image: "uiux.png",
-    },
-    {
-      text: "Creative Design",
-      image: "creative_design.jpg",
-    },
-    {
-      text: "Blockchain",
-      image: "blockchain.png",
-    },
-  ];
-
+  const scrollTextRef = useRef<HTMLElement>(null);
   const buttonLink = [
     { icon: <FaGithub />, color: "black", label: "Github" },
     { icon: <FaLinkedin />, color: "black", label: "Linkedin" },
     { icon: <FaInstagram />, color: "black", label: "Instagram" },
   ];
 
-  const worksItem = [
-    {
-      id: "1",
-      img: "/onedaybiotech.png",
-      url: "https://dev-onedaybiotech-cms.vercel.app/",
-      height: 400,
-    },
-    {
-      id: "2",
-      img: "/brimofstvl.png",
-      url: "https://brimofstvl.bri.co.id/",
-      height: 300,
-    },
-    {
-      id: "3",
-      img: "/zoetispetz.png",
-      url: "https://onelink.to/k6b9da",
-      height: 600,
-    },
-    {
-      id: "4",
-      img: "/pratiwi.png",
-      url: "/",
-      height: 340,
-    },
-    {
-      id: "5",
-      img: "/waytodo.png",
-      url: "/",
-      height: 550,
-    },
-    {
-      id: "6",
-      img: "/dumbflix.png",
-      url: "/",
-      height: 700,
-    },
-    {
-      id: "7",
-      img: "/mindsetlab.png",
-      url: "https://mindsetlab.id/",
-      height: 325,
-    },
-    {
-      id: "8",
-      img: "/cinemaonline.png",
-      url: "/",
-      height: 400,
-    },
-    {
-      id: "9",
-      img: "/harmouni.png",
-      url: "/",
-      height: 300,
-    },
-    {
-      id: "10",
-      img: "/bricams.png",
-      url: "https://bricams.bri.co.id/",
-      height: 330,
-    },
-    {
-      id: "11",
-      img: "/nusantara.png",
-      url: "/",
-      height: 450,
-    },
-    {
-      id: "12",
-      img: "/pancasakti.png",
-      url: "/",
-      height: 250,
-    },
-  ];
-
   return (
     <>
       <Navbar />
-      <div className="relative h-screen w-full snap-y snap-mandatory overflow-y-scroll scroll-smooth">
+      <div className="relative min-h-screen w-full snap-y snap-mandatory overflow-y-scroll scroll-smooth">
         <CustomCursor />
         <div className="fixed inset-0 h-full z-10 pointer-events-none">
           <Particles
@@ -172,9 +79,21 @@ const App = () => {
             </div>
           </section>
           <section
-            id="thankyou"
-            className="h-screen snap-start flex items-center justify-center text-white"
-          ></section>
+            id="trailtext"
+            ref={scrollTextRef}
+            className="h-screen flex flex-col mt-[35rem] lg:mt-64 max-w-7xl px-6 mx-auto items-center justify-center [scroll-snap-align:none] text-white"
+          >
+            <ScrollFloat
+              animationDuration={1}
+              ease="back.inOut(2)"
+              triggerRef={scrollTextRef}
+              scrollStart="top 250%"
+              stagger={0.03}
+            >
+              Crafting bold ideas into digital realities — shall we?
+            </ScrollFloat>
+            <Card />
+          </section>
         </div>
       </div>
     </>
