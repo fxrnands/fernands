@@ -1,0 +1,64 @@
+[
+  {
+    "role": "Frontend Developer",
+    "company": "MINDSET LAB",
+    "type": "Full-time",
+    "date": "May 2024 - Present · 1 yr 2 mos",
+    "location": "Jakarta, Indonesia · On-site",
+    "description": [
+      "Created a job portal application, from ideation to implementation.",
+      "Developed the MINDSETLAB CREATIVE website to showcase the company’s portfolio.",
+      "Supported development and maintenance of WordPress websites for clients.",
+      "Built BRImo FSTVL, Qlola, BRImo Merchant, and BRImo Microsite with SEO and new features.",
+      "Developed and maintained ZoetisPetz App for veterinary and animal clinic users."
+    ]
+  },
+  {
+    "role": "Frontend Engineer",
+    "company": "Freelance (Self employed)",
+    "type": "Freelance",
+    "date": "Feb 2022 - Nov 2024 · 2 yrs 10 mos",
+    "location": "Bekasi, West Java, Indonesia · Remote",
+    "description": [
+      "Created a university website with registration and student checking.",
+      "Built a mobile web for coffee shops with QRIS, coupons, and order notifications.",
+      "Created a CMS for managing products for clients."
+    ]
+  },
+  {
+    "role": "Frontend Developer",
+    "company": "PT HEALSTATION INDONESIA",
+    "type": "Full-time",
+    "date": "Mar 2023 - Apr 2024 · 1 yr 2 mos",
+    "location": "Indonesia · Hybrid",
+    "description": [
+      "Built Korean E-commerce Web Application for Dental Health Clinics.",
+      "Feature dev & bug fixing for Korean Government Project.",
+      "Developed landing pages and mobile apps using React Native."
+    ]
+  },
+  {
+    "role": "Frontend Developer",
+    "company": "PT Bank Rakyat Indonesia (Persero) Tbk",
+    "type": "Full-time",
+    "date": "Nov 2022 - Feb 2023 · 4 mos",
+    "location": "Bandung, Indonesia · On-site",
+    "description": [
+      "Built web modules for banking apps.",
+      "Collaborated with backend developers on feature integration.",
+      "Maintained production-level banking web apps.",
+      "Worked in agile teams with sprint targets."
+    ]
+  },
+  {
+    "role": "Fullstack Developer",
+    "company": "PT. DumbWays Indonesia Teknologi",
+    "type": "Apprenticeship",
+    "date": "Aug 2022 - Oct 2022 · 3 mos",
+    "location": "Tangerang Selatan, Banten · On-site",
+    "description": [
+      "Completed fullstack bootcamp (React, Golang, Node, React Native).",
+      "Worked on Dumbflix, Cinema Online, Todo App, and Personal Portfolio."
+    ]
+  }
+]
