@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { FaArrowRight, FaRightLeft } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa6";
 
 export const AnimatedButton = ({ onClick }: { onClick: () => void }) => {
   const [isHovered, setIsHovered] = useState(false);
