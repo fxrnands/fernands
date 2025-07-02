@@ -3,19 +3,18 @@ import experience from "../../data/experienceData.json";
 import { motion } from "framer-motion";
 import SpotlightCard from "../base/cards";
 import BlurText from "../base/blurred-text";
-import AnimatedSection from "./section-wrapper";
 
 export default function ExperienceSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   return (
-    <AnimatedSection
+    <section
       id="experience"
       className="relative h-screen snap-start bg-black/60 text-[#FAFAFA] px-6 py-20 overflow-hidden"
     >
       <div className="mb-16 text-left max-w-7xl mt-6 mx-auto lg:px-6">
         <div className="flex items-center gap-4 mb-4">
           <BlurText
-            text="Who is Fernands?"
+            text="WHO IS FERNANDS?"
             className="text-3xl lg:text-5xl font-bold whitespace-nowrap"
           />
           <div className="flex-1 h-[2px] lg:block hidden bg-white relative">
@@ -41,7 +40,7 @@ export default function ExperienceSection() {
       <div className="max-w-7xl lg:px-6 mx-auto w-full h-full flex flex-col">
         <div className="flex items-center gap-4 mb-8">
           <BlurText
-            text="A Look Into My Career"
+            text="A LOOK INTO MY CAREER"
             className="text-3xl lg:text-5xl font-bold whitespace-nowrap"
           />
 
@@ -78,6 +77,6 @@ export default function ExperienceSection() {
           ))}
         </motion.div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

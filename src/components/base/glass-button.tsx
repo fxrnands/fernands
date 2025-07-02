@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 export interface GlassIconsItem {
   icon: React.ReactElement;
@@ -31,16 +32,19 @@ const GlassIcons: React.FC<GlassIconsProps> = ({ items, className }) => {
 
   return (
     <div
-      className={`grid grid-cols-3 lg:w-[30%] w-[80%] md:grid-cols-3 py-[3em] overflow-visible ${
+      className={`grid grid-cols-3 lg:w-[30%] w-[80%] md:grid-cols-3 py-[3em] overflow-visible gap-4 ${
         className || ""
       }`}
     >
       {items.map((item, index) => (
-        <button
+        <motion.button
           key={index}
           type="button"
           aria-label={item.label}
-          className={`relative cursor-none bg-transparent outline-none w-[3.5em] h-[3.5em] [perspective:24em] [transform-style:preserve-3d] [-webkit-tap-highlight-color:transparent] group ${
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "anticipate", delay: 0.5 * index }}
+          className={`relative glass-icon-hover cursor-none bg-transparent outline-none w-[3.5em] h-[3.5em] [perspective:24em] [transform-style:preserve-3d] [-webkit-tap-highlight-color:transparent] group ${
             item.customClass || ""
           }`}
         >
@@ -65,11 +69,7 @@ const GlassIcons: React.FC<GlassIconsProps> = ({ items, className }) => {
               {item.icon}
             </span>
           </span>
-
-          <span className="absolute top-full left-0 right-0 text-center whitespace-nowrap leading-[2] text-base opacity-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.83,0,0.17,1)] translate-y-0 group-hover:opacity-100 group-hover:[transform:translateY(20%)]">
-            {item.label}
-          </span>
-        </button>
+        </motion.button>
       ))}
     </div>
   );

@@ -251,7 +251,7 @@ const Works: React.FC<MasonryProps> = ({
         <div
           key={item.id}
           data-key={item.id}
-          className="absolute box-content p-2"
+          className="absolute glass-icon-hover box-content p-2"
           style={{ willChange: "transform, width, height, opacity" }}
           onClick={() => window.open(item.url, "_blank", "noopener")}
           onMouseEnter={(e) => handleMouseEnter(item.id, e.currentTarget)}

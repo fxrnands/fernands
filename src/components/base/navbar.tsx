@@ -47,7 +47,12 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50  text-white">
+      <motion.header
+        className="fixed top-0 left-0 w-full z-50 text-white"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: "anticipate" }}
+      >
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-lg font-bold tracking-widest">
             <img src="/fernands.png" width={150} />
@@ -71,10 +76,10 @@ export default function Navbar() {
             )}
           </button>
         </div>
-      </header>
+      </motion.header>
 
       {/* Menu */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isOpen && (
           <>
             <motion.div

@@ -24,12 +24,6 @@ export const worksItem = [
     height: 340,
   },
   {
-    id: "5",
-    img: "/waytodo.png",
-    url: "/",
-    height: 550,
-  },
-  {
     id: "6",
     img: "/dumbflix.png",
     url: "/",
@@ -59,18 +53,6 @@ export const worksItem = [
     url: "https://bricams.bri.co.id/",
     height: 330,
   },
-  {
-    id: "11",
-    img: "/nusantara.png",
-    url: "/",
-    height: 450,
-  },
-  {
-    id: "12",
-    img: "/pancasakti.png",
-    url: "/",
-    height: 250,
-  },
 ];
 
 export const specialist = [
@@ -93,5 +75,9 @@ export const specialist = [
   {
     text: "Blockchain",
     image: "blockchain.png",
+  },
+  {
+    text: "Website SEO",
+    image: "seo.png",
   },
 ];

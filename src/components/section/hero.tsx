@@ -15,12 +15,12 @@ const Hero = ({ buttonLink }: Props) => {
     >
       <div className="max-w-7xl mt-20 px-6 mx-auto">
         <BlurText
-          className="lg:max-w-[70%] lg:text-[6rem] text-[3rem] leading-[3rem] lg:leading-[6rem] font-bold"
+          className="lg:max-w-[90%] uppercase lg:text-[6rem] text-[3rem] leading-[3rem] lg:leading-[6rem] font-extrabold"
           text={tagline}
         />
 
         <BlurText
-          className="lg:text-2xl text-xl lg:max-w-[40%] mt-10 font-bold"
+          className="lg:text-xl text-xl lg:max-w-[40%] mt-10 font-semibold"
           text={introduction}
         />
 
