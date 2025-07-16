@@ -48,7 +48,7 @@ function VelocityText({
   children,
   baseVelocity = 100,
   className = "",
-  numCopies = 6,
+  numCopies = 10,
   parallaxClassName,
   scrollerClassName,
   parallaxStyle,
@@ -89,11 +89,11 @@ function VelocityText({
 
   return (
     <div
-      className={`${parallaxClassName} relative bg-white overflow-hidden`}
+      className={`${parallaxClassName} relative bg-[#181818] overflow-hidden`}
       style={parallaxStyle}
     >
       <motion.div
-        className={`${scrollerClassName} flex whitespace-nowrap text-center text-thi font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]`}
+        className={`${scrollerClassName} flex text-white whitespace-nowrap text-center  font-denton text-2xl font-bold tracking-[-0.02em] drop-shadow md:text-[2rem] md:leading-[5rem]`}
         style={{ x, ...scrollerStyle }}
       >
         {spans}

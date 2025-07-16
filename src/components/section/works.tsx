@@ -1,272 +1,133 @@
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { gsap } from "gsap";
-import { useInView } from "react-intersection-observer";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
-const useMedia = (
-  queries: string[],
-  values: number[],
-  defaultValue: number
-): number => {
-  const get = () =>
-    values[queries.findIndex((q) => matchMedia(q).matches)] ?? defaultValue;
-
-  const [value, setValue] = useState<number>(get);
-
-  useEffect(() => {
-    const handler = () => setValue(get);
-    queries.forEach((q) => matchMedia(q).addEventListener("change", handler));
-    return () =>
-      queries.forEach((q) =>
-        matchMedia(q).removeEventListener("change", handler)
-      );
-  }, [queries]);
-
-  return value;
-};
-
-const useMeasure = <T extends HTMLElement>() => {
-  const ref = useRef<T | null>(null);
-  const [size, setSize] = useState({ width: 0, height: 0 });
-
-  useLayoutEffect(() => {
-    if (!ref.current) return;
-    const ro = new ResizeObserver(([entry]) => {
-      const { width, height } = entry.contentRect;
-      setSize({ width, height });
-    });
-    ro.observe(ref.current);
-    return () => ro.disconnect();
-  }, []);
-
-  return [ref, size] as const;
-};
-
-const preloadImages = async (urls: string[]): Promise<void> => {
-  await Promise.all(
-    urls.map(
-      (src) =>
-        new Promise<void>((resolve) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = img.onerror = () => resolve();
-        })
-    )
-  );
-};
-
-interface Item {
-  id: string;
-  img: string;
-  url: string;
-  height: number;
+interface WorkItem {
+  type: "image" | "video";
+  src: string;
+  alt?: string;
+  title: string;
+  techStack: string;
+  url?: string;
 }
 
-interface MasonryProps {
-  items: Item[];
-  ease?: string;
-  duration?: number;
-  stagger?: number;
-  animateFrom?: "bottom" | "top" | "left" | "right" | "center" | "random";
-  scaleOnHover?: boolean;
-  hoverScale?: number;
-  blurToFocus?: boolean;
-  colorShiftOnHover?: boolean;
+interface WorksProps {
+  items: WorkItem[];
 }
 
-const Works: React.FC<MasonryProps> = ({
-  items,
-  ease = "power3.out",
-  duration = 0.6,
-  stagger = 0.05,
-  animateFrom = "bottom",
-  scaleOnHover = true,
-  hoverScale = 0.95,
-  blurToFocus = true,
-  colorShiftOnHover = false,
-}) => {
-  const columns = useMedia(
-    [
-      "(min-width:1500px)",
-      "(min-width:1000px)",
-      "(min-width:600px)",
-      "(min-width:400px)",
-    ],
-    [5, 4, 3, 2],
-    1
-  );
+const Works: React.FC<WorksProps> = ({ items }) => {
+  const containerRef = useRef(null);
 
-  const [containerRef, { width }] = useMeasure<HTMLDivElement>();
-  const setRefs = (node: HTMLDivElement) => {
-    containerRef.current = node;
-    inViewRef(node);
-  };
-
-  const [imagesReady, setImagesReady] = useState(false);
-
-  const getInitialPosition = (item: any) => {
-    const containerRect = containerRef.current?.getBoundingClientRect();
-    if (!containerRect) return { x: item.x, y: item.y };
-
-    let direction = animateFrom;
-    if (animateFrom === "random") {
-      const dirs = ["top", "bottom", "left", "right"];
-      direction = dirs[
-        Math.floor(Math.random() * dirs.length)
-      ] as typeof animateFrom;
-    }
-
-    switch (direction) {
-      case "top":
-        return { x: item.x, y: -200 };
-      case "bottom":
-        return { x: item.x, y: window.innerHeight + 200 };
-      case "left":
-        return { x: -200, y: item.y };
-      case "right":
-        return { x: window.innerWidth + 200, y: item.y };
-      case "center":
-        return {
-          x: containerRect.width / 2 - item.w / 2,
-          y: containerRect.height / 2 - item.h / 2,
-        };
-      default:
-        return { x: item.x, y: item.y + 100 };
-    }
-  };
-
-  useEffect(() => {
-    preloadImages(items.map((i) => i.img)).then(() => setImagesReady(true));
-  }, [items]);
-
-  const grid = useMemo(() => {
-    if (!width) return [];
-    const colHeights = new Array(columns).fill(0);
-    const gap = 16;
-    const columnWidth = (width - (columns - 1) * gap) / columns;
-
-    return items.map((child) => {
-      const col = colHeights.indexOf(Math.min(...colHeights));
-      const x = col * (columnWidth + gap);
-      const y = colHeights[col];
-      const height = child.height / 2;
-
-      colHeights[col] += height + gap;
-      return { ...child, x, y, w: columnWidth, h: height };
-    });
-  }, [columns, items, width]);
-
-  const hasMounted = useRef(false);
-  const { ref: inViewRef, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
   });
 
-  useLayoutEffect(() => {
-    if (!imagesReady || !inView) return;
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const smoothY = useSpring(textY, { stiffness: 50, damping: 20, mass: 1 });
 
-    grid.forEach((item, index) => {
-      const selector = `[data-key="${item.id}"]`;
-      const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
-
-      if (!hasMounted.current) {
-        const start = getInitialPosition(item);
-        gsap.fromTo(
-          selector,
-          {
-            opacity: 0,
-            x: start.x,
-            y: start.y,
-            width: item.w,
-            height: item.h,
-            ...(blurToFocus && { filter: "blur(10px)" }),
-          },
-          {
-            opacity: 1,
-            ...animProps,
-            ...(blurToFocus && { filter: "blur(0px)" }),
-            duration: 0.8,
-            ease: "power3.out",
-            delay: index * stagger,
-          }
-        );
-      } else {
-        gsap.to(selector, {
-          ...animProps,
-          duration,
-          ease,
-          overwrite: "auto",
-        });
-      }
-    });
-
-    hasMounted.current = true;
-  }, [
-    grid,
-    imagesReady,
-    stagger,
-    animateFrom,
-    blurToFocus,
-    duration,
-    ease,
-    inView,
-  ]);
-
-  const handleMouseEnter = (id: string, element: HTMLElement) => {
-    if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
-        scale: hoverScale,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    }
-    if (colorShiftOnHover) {
-      const overlay = element.querySelector(".color-overlay") as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0.3, duration: 0.3 });
-    }
-  };
-
-  const handleMouseLeave = (id: string, element: HTMLElement) => {
-    if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
-        scale: 1,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    }
-    if (colorShiftOnHover) {
-      const overlay = element.querySelector(".color-overlay") as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.3 });
-    }
-  };
+  const positions = [
+    { top: "35vh", left: "5vw" },
+    { top: "55vh", right: "10vw" },
+    { top: "80vh", left: "20vw" },
+    { top: "110vh", right: "10vw" },
+    { top: "135vh", left: "10vw" },
+    { top: "160vh", right: "15vw" },
+    { top: "190vh", left: "5vw" },
+    { top: "210vh", right: "10vw" },
+    { top: "230vh", left: "5vw" },
+  ];
 
   return (
-    <div ref={setRefs} className="relative w-full min-h-screen">
-      {grid.map((item) => (
-        <div
-          key={item.id}
-          data-key={item.id}
-          className="absolute glass-icon-hover box-content p-2"
-          style={{ willChange: "transform, width, height, opacity" }}
-          onClick={() => window.open(item.url, "_blank", "noopener")}
-          onMouseEnter={(e) => handleMouseEnter(item.id, e.currentTarget)}
-          onMouseLeave={(e) => handleMouseLeave(item.id, e.currentTarget)}
-        >
-          <div
-            className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-[10px]"
-            style={{ backgroundImage: `url(${item.img})` }}
+    <div
+      ref={containerRef}
+      className="relative w-full min-h-[250vh] overflow-hidden pt-[30vh]"
+    >
+      <motion.div
+        style={{ y: smoothY }}
+        className="absolute inset-0 z-0 pointer-events-none select-none"
+      >
+        {[
+          { text: "Mobile Apps Development", top: "20vh", left: "10vw" },
+          { text: "Website Development", top: "50vh", right: "2vw" },
+          { text: "Optimization", top: "110vh", left: "60vw" },
+          { text: "Search Engine", top: "130vh", left: "5vw" },
+          { text: "Blockchain", top: "170vh", right: "10vw" },
+          { text: "3D Website", top: "210vh", right: "10vw" },
+          { text: "UI/UX", top: "200vh", left: "15vw" },
+          { text: "Creative Design", top: "250vh", left: "15vw" },
+        ].map((item, index) => (
+          <h2
+            key={index}
+            className="absolute text-[10vw] uppercase font-denton md:text-[5vw] font-bold text-[#181818] opacity-30 "
+            style={{
+              top: item.top,
+              left: item.left,
+              right: item.right,
+            }}
           >
-            {colorShiftOnHover && (
-              <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
-            )}
-          </div>
-        </div>
-      ))}
+            {item.text}
+          </h2>
+        ))}
+      </motion.div>
+
+      {items.map((item, index) => {
+        const ref = useRef(null);
+        const { scrollYProgress } = useScroll({
+          target: ref,
+          offset: ["start end", "end start"],
+        });
+
+        const speed = -100 - index * 20;
+        const rawY = useTransform(scrollYProgress, [0, 1], ["0%", `${speed}%`]);
+        const y = useSpring(rawY, { stiffness: 50, damping: 20, mass: 1 });
+
+        const pos = positions[index % positions.length];
+
+        return (
+          <motion.figure
+            key={index}
+            ref={ref}
+            style={{
+              y,
+              top: pos.top,
+              left: pos.left,
+              right: pos.right,
+            }}
+            className="absolute glass-icon-hover w-[300px] md:w-[550px] z-10"
+            onClick={() => item.url && window.open(item.url, "_blank")}
+          >
+            <div className="relative overflow-hidden group">
+              {item.type === "image" ? (
+                <img
+                  src={item.src}
+                  alt={item.alt || `work-${index}`}
+                  className="w-full h-auto object-cover"
+                />
+              ) : (
+                <video
+                  src={item.src}
+                  muted
+                  loop
+                  autoPlay
+                  playsInline
+                  className="w-full h-auto object-cover"
+                />
+              )}
+              {/* <figcaption className="absolute bottom-0 left-0 w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/70 to-transparent">
+                <h3 className="text-lg uppercase">
+                  <span className="text-sm font-mono text-gray-400">
+                    0{index + 1}.
+                  </span>{" "}
+                  <span className="text-[#dbdbdb] font-satoshi">
+                    {item.title}
+                  </span>
+                </h3>
+                <p className="text-sm text-gray-300">{item.techStack}</p>
+              </figcaption> */}
+            </div>
+          </motion.figure>
+        );
+      })}
     </div>
   );
 };

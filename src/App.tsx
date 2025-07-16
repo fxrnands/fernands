@@ -1,6 +1,4 @@
-import { useEffect, useState, Suspense, lazy, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { Suspense, lazy, useEffect, useState, useRef } from "react";
 
 import "./App.css";
 
@@ -8,129 +6,129 @@ import Navbar from "./components/base/navbar";
 import CustomCursor from "./components/base/custom-cursor";
 import ScrollVelocity from "./components/base/velocity-text";
 import Card from "./components/section/card";
+import { worksItem } from "./data/data";
+import BlurText from "./components/base/blurred-text";
+import LoadingScreen from "./components/base/loading";
+import ScrollFloat from "./components/base/scroll-float";
+import Noise from "./components/base/noise";
+import { AnimatePresence } from "framer-motion";
 
 const Hero = lazy(() => import("./components/section/hero"));
-const ExperienceSection = lazy(() => import("./components/section/experience"));
-const FlowingMenu = lazy(() => import("./components/base/flowing-menus"));
+const Career = lazy(() => import("./components/section/career"));
 const Works = lazy(() => import("./components/section/works"));
-const Particles = lazy(() => import("./components/base/particles"));
-const SpaceStation = lazy(() => import("./components/base/space-station"));
-import { specialist, worksItem } from "./data/data";
-import BlurText from "./components/base/blurred-text";
 
-const App = () => {
-  const [scrollY, setScrollY] = useState(0);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+export default function App() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-      debounceRef.current = setTimeout(() => {
-        setScrollY(window.scrollY);
-      }, 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const fakeDelay = setTimeout(() => setIsLoading(false), 3000);
+    return () => clearTimeout(fakeDelay);
   }, []);
 
-  const buttonLink = [
-    { icon: <FaGithub />, color: "black", label: "Github" },
-    { icon: <FaLinkedin />, color: "black", label: "Linkedin" },
-    { icon: <FaInstagram />, color: "black", label: "Instagram" },
-  ];
-
   return (
-    <Suspense
-      fallback={
-        <div className="fixed inset-0 flex items-center justify-center text-white bg-black z-50">
-          Loading Website...
-        </div>
-      }
-    >
-      <Navbar />
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && <LoadingScreen />}
+      </AnimatePresence>
+      <Suspense fallback={<div className="fixed inset-0 bg-[#dbdbdb]" />}>
+        <Navbar />
 
-      <div className="relative min-h-screen w-full overflow-y-scroll scroll-smooth">
-        <CustomCursor />
-
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <Particles
-            particleColors={["#ffffff"]}
-            particleCount={100}
-            particleSpread={10}
-            speed={0.1}
-            particleBaseSize={100}
-            moveParticlesOnHover={true}
-            alphaParticles={false}
-            disableRotation={false}
+        <div className="fixed inset-0 z-[-1] pointer-events-none">
+          <Noise
+            patternSize={250}
+            patternScaleX={1}
+            patternScaleY={1}
+            patternRefreshInterval={4}
+            patternAlpha={15}
           />
-
-          <div className="fixed inset-0 lg:block hidden z-[1] pointer-events-none">
-            <Canvas
-              frameloop="always"
-              camera={{ position: [0, 0, 10], fov: 50 }}
-              style={{ width: "100%", height: "100%" }}
-            >
-              <ambientLight intensity={1} />
-              <Suspense fallback={null}>
-                <SpaceStation scrollY={scrollY} />
-              </Suspense>
-            </Canvas>
-          </div>
         </div>
 
-        <div className="fixed inset-0 bg-black z-[-1]" />
+        {/* Static Background Layer */}
+        <div className="fixed inset-0 bg-[#dbdbdb] z-[-2]" />
 
-        <div className="relative z-10">
-          <Hero buttonLink={buttonLink} />
-          <ExperienceSection />
+        {/* Main Content */}
+        <div className="relative min-h-screen w-full overflow-y-auto scroll-smooth">
+          <CustomCursor />
 
-          <section
-            id="specialist"
-            className="h-screen flex items-center justify-center text-white"
-          >
-            <FlowingMenu items={specialist} />
-          </section>
+          <div className="relative z-10">
+            {/* Hero Section */}
+            <section
+              id="home"
+              className="h-full snap-start flex mt-[75px] pb-36 overflow-hidden"
+            >
+              <Hero />
+            </section>
 
-          <section
-            id="connect"
-            className="h-full items-center justify-center pb-36 lg:pb-0 text-white"
-          >
-            <div className="max-w-7xl pt-24 mx-auto px-6">
-              <div className="flex items-center gap-4 mb-4">
-                <BlurText
-                  text="THINGS I MADE"
-                  className="text-3xl lg:text-5xl font-bold whitespace-nowrap"
+            {/* Works Section */}
+            <section
+              id="works"
+              ref={sectionRef}
+              className="h-full items-center lg:pt-32 text-white"
+            >
+              <div className="relative w-full h-full grid place-items-center overflow-hidden px-4">
+                <img
+                  src="/sunburst.svg"
+                  alt="Radial Burst"
+                  className="absolute inset-0 w-[150%] h-[150%] mx-auto my-auto spin-slow opacity-20"
                 />
-                <div className="flex-1 h-[2px] lg:block hidden bg-white relative">
-                  <span className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full"></span>
-                </div>
+
+                <BlurText
+                  direction="bottom"
+                  text="FEATURED"
+                  className="relative text-[4rem] lg:text-[10rem] text-[#FF2DD1] font-denton"
+                />
+                <BlurText
+                  direction="top"
+                  text="WORKS"
+                  className="relative text-[4rem] lg:text-[10rem] lg:leading-[8rem] text-[#181818] font-denton"
+                />
               </div>
 
-              <Works
-                items={worksItem}
-                ease="power3.out"
-                duration={0.6}
-                stagger={0.05}
-                animateFrom="random"
-                scaleOnHover
-                hoverScale={0.95}
-                blurToFocus
-              />
+              <div className="max-w-8xl mx-auto">
+                <Works
+                  items={worksItem.map((item) => ({
+                    ...item,
+                    type:
+                      item.type === "image" || item.type === "video"
+                        ? item.type
+                        : "image",
+                  }))}
+                />
+              </div>
+            </section>
+
+            {/* Career Section */}
+            <section id="experience" className="pt-12 mx-auto">
+              <Career />
+            </section>
+
+            {/* ScrollFloat Quote */}
+            <div className="h-full md:pt-32 px-6">
+              <ScrollFloat
+                animationDuration={1}
+                ease="back.inOut(2)"
+                scrollStart="center bottom+=50%"
+                scrollEnd="bottom bottom-=40%"
+                textClassName="md:text-[5rem] text-[2rem] font-denton"
+                stagger={0.01}
+              >
+                perfection isn't born out of love, it's forged in frustration,
+                obsession, and an unrelenting pursuit of something better.
+              </ScrollFloat>
             </div>
-          </section>
 
-          <footer>
-            <Card />
-            <ScrollVelocity
-              texts={["THANKS FOR VISIT!"]}
-              className="custom-scroll-text"
-            />
-          </footer>
+            {/* Footer */}
+            <footer id="connect">
+              <Card />
+              <ScrollVelocity
+                texts={["THANKS FOR VISIT!"]}
+                className="custom-scroll-text"
+              />
+            </footer>
+          </div>
         </div>
-      </div>
-    </Suspense>
+      </Suspense>
+    </>
   );
-};
-
-export default App;
+}

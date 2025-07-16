@@ -1,64 +1,42 @@
 [
   {
-    "role": "Frontend Developer",
-    "company": "MINDSET LAB",
+    "role": "Frontend Engineer",
+    "company": "MINDSET LAB CREATIVE",
     "type": "Full-time",
-    "date": "May 2024 - Present · 1 yr 2 mos",
+    "date": "May 2024 → Present · 1 YRS 2 MNTHS",
     "location": "Jakarta, Indonesia · On-site",
-    "description": [
-      "Created a job portal application, from ideation to implementation.",
-      "Developed the MINDSETLAB CREATIVE website to showcase the company’s portfolio.",
-      "Supported development and maintenance of WordPress websites for clients.",
-      "Built BRImo FSTVL, Qlola, BRImo Merchant, and BRImo Microsite with SEO and new features.",
-      "Developed and maintained ZoetisPetz App for veterinary and animal clinic users."
-    ]
+    "description": "At MINDSET LAB, I developed a job portal application from ideation to implementation and created the MINDSETLAB CREATIVE website to showcase our portfolio. I also supported the development of a WordPress project for Solusi Bangun Indonesia and contributed to major BRI projects like BRImo FSTVL, Qlola, BRImo Merchant, and BRImo Microsite by developing new features and implementing SEO strategies. Additionally, I built the ZoetisPetz App for veterinary and animal clinic users."
   },
   {
     "role": "Frontend Engineer",
     "company": "Freelance (Self employed)",
     "type": "Freelance",
-    "date": "Feb 2022 - Nov 2024 · 2 yrs 10 mos",
+    "date": "Feb 2022 → Nov 2024 · 2 YRS 10 MNTHS",
     "location": "Bekasi, West Java, Indonesia · Remote",
-    "description": [
-      "Created a university website with registration and student checking.",
-      "Built a mobile web for coffee shops with QRIS, coupons, and order notifications.",
-      "Created a CMS for managing products for clients."
-    ]
+    "description": "During my freelance journey, I developed a university website complete with registration and student check features, a mobile web app for coffee shops with QRIS payment, coupons, and real-time order notifications, and a CMS to help clients manage their product catalogs seamlessly."
   },
   {
     "role": "Frontend Developer",
-    "company": "PT HEALSTATION INDONESIA",
+    "company": "PT Healstation Indonesia",
     "type": "Full-time",
-    "date": "Mar 2023 - Apr 2024 · 1 yr 2 mos",
+    "date": "Mar 2023 → Apr 2024 · 1 YRS 2 MNTHS",
     "location": "Indonesia · Hybrid",
-    "description": [
-      "Built Korean E-commerce Web Application for Dental Health Clinics.",
-      "Feature dev & bug fixing for Korean Government Project.",
-      "Developed landing pages and mobile apps using React Native."
-    ]
+    "description": "At PT HEALSTATION INDONESIA, I worked on a Korean e-commerce web application tailored for dental health clinics. I was responsible for developing new features and bug fixing for a Korean Government Project, while also building landing pages and mobile apps using React Native to expand the company’s digital reach."
   },
   {
     "role": "Frontend Developer",
     "company": "PT Bank Rakyat Indonesia (Persero) Tbk",
     "type": "Full-time",
-    "date": "Nov 2022 - Feb 2023 · 4 mos",
+    "date": "Nov 2022 → Feb 2023 · 4 MNTHS",
     "location": "Bandung, Indonesia · On-site",
-    "description": [
-      "Built web modules for banking apps.",
-      "Collaborated with backend developers on feature integration.",
-      "Maintained production-level banking web apps.",
-      "Worked in agile teams with sprint targets."
-    ]
+    "description": "I contributed to PT Bank Rakyat Indonesia as a frontend developer, building web modules for various banking applications. I collaborated closely with backend developers for smooth feature integration, ensured production-level stability of the banking web apps, and worked in agile teams with clear sprint goals."
   },
   {
     "role": "Fullstack Developer",
     "company": "PT. DumbWays Indonesia Teknologi",
     "type": "Apprenticeship",
-    "date": "Aug 2022 - Oct 2022 · 3 mos",
-    "location": "Tangerang Selatan, Banten · On-site",
-    "description": [
-      "Completed fullstack bootcamp (React, Golang, Node, React Native).",
-      "Worked on Dumbflix, Cinema Online, Todo App, and Personal Portfolio."
-    ]
+    "date": "Aug 2022 → Oct 2022 · 3 mos",
+    "location": "South Tangerang, Banten · On-site",
+    "description": "Through the DumbWays bootcamp, I completed intensive training as a fullstack developer with React, Golang, Node, and React Native. I contributed to projects like Dumbflix, Cinema Online, a Todo App, and built my own personal portfolio — sharpening both my technical and collaboration skills."
   }
 ]

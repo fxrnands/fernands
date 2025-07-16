@@ -14,6 +14,7 @@ type BlurTextProps = {
   easing?: (t: number) => number;
   onAnimationComplete?: () => void;
   stepDuration?: number;
+  onAction?: number;
 };
 
 const buildKeyframes = (
@@ -40,6 +41,7 @@ const BlurText: React.FC<BlurTextProps> = ({
   direction = "top",
   threshold = 0.1,
   rootMargin = "0px",
+  onAction = 0,
   animationFrom,
   animationTo,
   easing = (t) => t,
@@ -55,7 +57,9 @@ const BlurText: React.FC<BlurTextProps> = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setInView(true);
+          setTimeout(() => {
+            setInView(true);
+          }, onAction);
           observer.unobserve(ref.current as Element);
         }
       },
@@ -95,7 +99,7 @@ const BlurText: React.FC<BlurTextProps> = ({
   );
 
   return (
-    <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
+    <h1 ref={ref} className={`blur-text ${className} flex flex-wrap`}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
@@ -125,7 +129,7 @@ const BlurText: React.FC<BlurTextProps> = ({
           </motion.span>
         );
       })}
-    </p>
+    </h1>
   );
 };
 

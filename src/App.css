@@ -9,6 +9,39 @@ body {
   cursor: none;
 }
 
+@font-face {
+  font-family: "Denton";
+  src: url("/Denton-Bold.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Clash";
+  src: url("/ClashDisplay-Variable.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/Satoshi-Variable.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-denton {
+  font-family: "Denton", sans-serif;
+}
+
+.font-clash {
+  font-family: "Clash", sans-serif;
+}
+
+.font-satoshi {
+  font-family: "Satoshi", sans-serif;
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0%);
@@ -20,4 +53,17 @@ body {
 
 .animate-marquee {
   animation: marquee 15s linear infinite;
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin-slow 20s linear infinite;
 }

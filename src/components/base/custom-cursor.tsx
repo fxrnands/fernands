@@ -10,6 +10,7 @@ export default function CustomCursor() {
   const y = useSpring(cursorY, springConfig);
 
   const [hoveredGlassIcon, setHoveredGlassIcon] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
@@ -38,18 +39,30 @@ export default function CustomCursor() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      setScrollProgress(Math.min(100, Math.max(0, scrollPercent)));
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <motion.div
-      className={`fixed top-0 left-0 w-8 h-8 rounded-full ${
+      className={`fixed top-0 left-0 w-14 h-14 rounded-full ${
         !hoveredGlassIcon && "mix-blend-difference"
-      }  pointer-events-none z-[9999] bg-white flex items-center justify-center`}
+      } pointer-events-none z-[9999] bg-white flex items-center justify-center`}
       style={{ x, y }}
       animate={{
         scale: hoveredGlassIcon ? 2 : 1,
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
-      {hoveredGlassIcon && (
+      {hoveredGlassIcon ? (
         <motion.span
           initial={{ opacity: 0, scale: 0.5, x: 8 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -59,6 +72,10 @@ export default function CustomCursor() {
         >
           <FaArrowRight />
         </motion.span>
+      ) : (
+        <span className="text-xs text-black font-mono">
+          {Math.round(scrollProgress)}%
+        </span>
       )}
     </motion.div>
   );

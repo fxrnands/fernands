@@ -10,7 +10,7 @@ export const AnimatedButton = ({ onClick }: { onClick: () => void }) => {
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="bg-white text-black cursor-none px-6 py-3 h-full rounded-md font-semibold overflow-hidden relative"
+      className="bg-[#181818] text-white cursor-none px-6 py-3 h-full rounded-md font-semibold overflow-hidden relative"
     >
       <AnimatePresence mode="wait">
         {isHovered ? (

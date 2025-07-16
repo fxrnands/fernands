@@ -1,7 +1,10 @@
 export const introduction =
-  "Hi, I'm Fernands — a Frontend Engineer building smooth, modern web experiences.";
+  "Hi, I'm Fernanda — a Frontend Engineer building smooth, modern web experiences.";
 
-export const tagline = "Crafting Beautiful Interfaces with Code & Care.";
+export const experiences =
+  "Frontend Engineer with over 3 years of experience turning ideas into fast, intuitive, and polished digital products. From banking platforms to creative agency sites and mobile apps, I specialize in crafting clean, scalable code and interfaces that not only work—but feel right. My daily tools include React, Next.js, Tailwind CSS, and TypeScript.";
+
+export const tagline = " — Crafting Beautiful Interfaces with  — Code & Care.";
 
 export const introductionContainer = {
   hidden: { opacity: 0 },
