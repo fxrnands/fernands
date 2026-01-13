@@ -1,9 +1,17 @@
 [
   {
     "role": "Frontend Engineer",
+    "company": "Primuse Entertainment",
+    "type": "Full-time",
+    "date": "July 2025 → Present · 5 MNTHS",
+    "location": "Bali, Indonesia · Remote",
+    "description": "I developed Kisum, a B2B web application designed for event promoters and agencies. I collaborated cross-functionally with backend, frontend, and UI/UX teams to successfully deliver the application MVP. I also improved the Primuse website by optimizing performance and enhancing overall user experience."
+  },
+  {
+    "role": "Frontend Engineer",
     "company": "MINDSET LAB CREATIVE",
     "type": "Full-time",
-    "date": "May 2024 → Present · 1 YRS 2 MNTHS",
+    "date": "May 2024 → June 2025 · 1 YR 2 MNTHS",
     "location": "Jakarta, Indonesia · On-site",
     "description": "At MINDSET LAB, I developed a job portal application from ideation to implementation and created the MINDSETLAB CREATIVE website to showcase our portfolio. I also supported the development of a WordPress project for Solusi Bangun Indonesia and contributed to major BRI projects like BRImo FSTVL, Qlola, BRImo Merchant, and BRImo Microsite by developing new features and implementing SEO strategies. Additionally, I built the ZoetisPetz App for veterinary and animal clinic users."
   },

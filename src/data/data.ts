@@ -71,6 +71,38 @@ export const worksItem = [
     title: "BRI CAMS",
     techStack: "Next.Js",
   },
+  {
+    id: "11",
+    type: "image",
+    src: "/poopooville.png",
+    url: "https://poopooville.io/",
+    title: "Poopooville",
+    techStack: "Next.js, Web3, Framer Motion",
+  },
+  {
+    id: "12",
+    type: "image",
+    src: "/soulful-goddess.png",
+    url: "/",
+    title: "Soulful Goddess",
+    techStack: "Next.js, SEO",
+  },
+  {
+    id: "13",
+    type: "image",
+    src: "/bri-barcelona.png",
+    url: "https://debit-bri-barcelona.vercel.app/id",
+    title: "BRI x FC Barcelona",
+    techStack: "Next.js, SEO, Framer Motion",
+  },
+  {
+    id: "14",
+    type: "image",
+    src: "/kisum.png",
+    url: "https://app.kisum.io/",
+    title: "Kisum App",
+    techStack: "Next.js, N8N",
+  },
 ];
 
 export const specialist = [

@@ -9,8 +9,6 @@ import Card from "./components/section/card";
 import { worksItem } from "./data/data";
 import BlurText from "./components/base/blurred-text";
 import LoadingScreen from "./components/base/loading";
-import ScrollFloat from "./components/base/scroll-float";
-import Noise from "./components/base/noise";
 import { AnimatePresence } from "framer-motion";
 
 const Hero = lazy(() => import("./components/section/hero"));
@@ -33,16 +31,6 @@ export default function App() {
       </AnimatePresence>
       <Suspense fallback={<div className="fixed inset-0 bg-[#dbdbdb]" />}>
         <Navbar />
-
-        <div className="fixed inset-0 z-[-1] pointer-events-none">
-          <Noise
-            patternSize={250}
-            patternScaleX={1}
-            patternScaleY={1}
-            patternRefreshInterval={4}
-            patternAlpha={15}
-          />
-        </div>
 
         {/* Static Background Layer */}
         <div className="fixed inset-0 bg-[#dbdbdb] z-[-2]" />
@@ -70,18 +58,18 @@ export default function App() {
                 <img
                   src="/sunburst.svg"
                   alt="Radial Burst"
-                  className="absolute inset-0 w-[150%] h-[150%] mx-auto my-auto spin-slow opacity-20"
+                  className="absolute h-full inset-0 w-[150%] mx-auto my-auto spin-slow opacity-20"
                 />
 
                 <BlurText
                   direction="bottom"
                   text="FEATURED"
-                  className="relative text-[4rem] lg:text-[10rem] text-[#FF2DD1] font-denton"
+                  className="relative text-[4rem] leading-tight lg:leading-[9rem] lg:text-[10rem] text-[#FF2DD1] font-denton"
                 />
                 <BlurText
                   direction="top"
                   text="WORKS"
-                  className="relative text-[4rem] lg:text-[10rem] lg:leading-[8rem] text-[#181818] font-denton"
+                  className="relative text-[4rem] leading-tight lg:text-[10rem] lg:leading-[8rem] text-[#181818] font-denton"
                 />
               </div>
 
@@ -102,21 +90,6 @@ export default function App() {
             <section id="experience" className="pt-12 mx-auto">
               <Career />
             </section>
-
-            {/* ScrollFloat Quote */}
-            <div className="h-full md:pt-32 px-6">
-              <ScrollFloat
-                animationDuration={1}
-                ease="back.inOut(2)"
-                scrollStart="center bottom+=50%"
-                scrollEnd="bottom bottom-=40%"
-                textClassName="md:text-[5rem] text-[2rem] font-denton"
-                stagger={0.01}
-              >
-                perfection isn't born out of love, it's forged in frustration,
-                obsession, and an unrelenting pursuit of something better.
-              </ScrollFloat>
-            </div>
 
             {/* Footer */}
             <footer id="connect">

@@ -17,12 +17,12 @@ const Hero = () => {
           delay={100}
           onAction={1000}
           className="lg:max-w-[90%] text-[#181818] mix-blend-difference px-6 uppercase 
-          lg:text-[6rem] text-[2.5rem] leading-[3rem] lg:leading-[6rem] font-denton"
+          lg:text-[6rem] text-[2rem] leading-[2.5rem] lg:leading-[6rem] font-denton"
           text={tagline}
         />
       </div>
 
-      <div className="w-full mt-4 flex flex-col md:flex-row justify-between gap-y-12">
+      <div className="w-full lg:mt-4 flex flex-col md:flex-row justify-between lg:gap-y-12">
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
@@ -42,7 +42,7 @@ const Hero = () => {
           <BlurText
             delay={100}
             onAction={1000}
-            className="lg:text-sm  uppercase h-fit px-6 text-xl font-satoshi mt-10 font-semibold text-center md:text-left"
+            className="lg:text-sm  uppercase h-fit px-6 text-xs font-satoshi mt-10 font-semibold text-center md:text-left"
             text={introduction}
           />
 
@@ -61,7 +61,7 @@ const Hero = () => {
       <BlurText
         delay={9}
         onAction={1000}
-        className="lg:text-sm uppercase my-12 px-6 text-sm font-satoshi lg:max-w-[60%] mt-10 font-semibold text-center md:text-left"
+        className="lg:text-sm uppercase my-12 px-6 text-xs font-satoshi lg:max-w-[60%] mt-10 font-semibold text-center md:text-left"
         text={experiences}
       />
     </div>

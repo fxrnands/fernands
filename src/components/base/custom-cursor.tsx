@@ -53,9 +53,9 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className={`fixed top-0 left-0 w-14 h-14 rounded-full ${
+      className={`fixed top-0 left-0 w-14 h-14 rounded-full hidden md:flex ${
         !hoveredGlassIcon && "mix-blend-difference"
-      } pointer-events-none z-[9999] bg-white flex items-center justify-center`}
+      } pointer-events-none z-[9999] bg-white items-center justify-center`}
       style={{ x, y }}
       animate={{
         scale: hoveredGlassIcon ? 2 : 1,

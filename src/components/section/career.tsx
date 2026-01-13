@@ -66,14 +66,7 @@ export default function Career() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative px-4">
-      <img
-        ref={sunburstRef}
-        src="/sunburst.svg"
-        alt="Sunburst Overlay"
-        className="absolute inset-0 mx-auto my-auto w-[150%] h-[150%] opacity-10 z-0 pointer-events-none"
-      />
-
+    <div ref={containerRef} className="relative py-36 px-4">
       <div
         ref={titleRef}
         className="relative flex gap-2 md:gap-[4rem] flex-col md:flex-row md:items-center md:justify-center mb-12 z-10"
